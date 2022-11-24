@@ -1,0 +1,45 @@
+.header{
+    min-height: 20vh;
+    color: #fff;
+}
+
+h2{
+    font-size: 3em;
+    display: block;
+}
+
+p{
+    font-size: 1.5em;
+}
+
+.viewport{
+    color: #fff;
+    padding: 1vmax;
+    max-width: 66vmax;
+}
+
+.pages{
+    padding: 1vmin;
+    margin: 1vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fill{
+    padding: 1vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pagesTitle{
+    display: flex;
+    justify-content: center;
+    
+}
+
+#pagesTitle h2{
+    
+    padding: 5px;
+}

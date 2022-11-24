@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Koblenz Serial';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Koblenz Serial'), url('./fonts/koblenz_serial-regular.woff') format('woff');
+  }
+
+.bar{
+    color: #fff;
+    height: 10vh;
+    background-color: #252031;
+    font-family: 'Koblenz Serial';
+}
+
+h4{
+    font-size: 3vh;
+    display: inline;
+    margin: auto
+}
+
+.bar-left{
+    float: left;
+    height: 100%;
+    display: flex;
+    margin: 0 2vh;
+    align-items: center;
+}
+
+.userInfo{
+    float: right;
+    height: 100%;
+    display: flex;
+    margin-right: 2vh;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.icon{
+    margin: 0 1vmin;
+}
+
+.username{
+    margin: 0 1vmin;
+}
+
+h5{
+    font-size: 2vh;
+    color: #fff;
+}

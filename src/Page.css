@@ -1,0 +1,20 @@
+.page{
+    max-height: 40vh;
+    overflow: scroll;
+}
+
+.users{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardUsername{
+    text-align: center;
+    color: black;
+}
+
+.userCard{
+    max-width: 20vw;
+}
