@@ -6,45 +6,30 @@
   }
 
 .bar{
-    color: #fff;
-    height: 10vh;
-    background-color: #252031;
+    background-color: #000000;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.bar > *{
+    margin: 1vh 2vw 0.5vh;
+}
+
+.bar .barLeft{
     font-family: 'Koblenz Serial';
+    text-align: left;
 }
 
-h4{
-    font-size: 3vh;
-    display: inline;
-    margin: auto
+.bar .barLeft h1{
+    font-size: 20pt;
 }
 
-.bar-left{
-    float: left;
-    height: 100%;
-    display: flex;
-    margin: 0 2vh;
-    align-items: center;
-}
-
-.userInfo{
-    float: right;
-    height: 100%;
-    display: flex;
-    margin-right: 2vh;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-}
-
-.icon{
-    margin: 0 1vmin;
+.bar .barRight{
+    text-align: right;
 }
 
 .username{
     margin: 0 1vmin;
-}
-
-h5{
-    font-size: 2vh;
-    color: #fff;
+    font-size: 16pt;
+    display: inline;
 }

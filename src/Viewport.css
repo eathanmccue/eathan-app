@@ -1,6 +1,44 @@
-.schedule{
-    background-color: #fff;
-    display: block;
-    height: fit-content;
-    width: ;
+@font-face {
+    font-family: 'Koblenz Serial';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Koblenz Serial'), url('./fonts/koblenz_serial-regular.woff') format('woff');
+}
+
+.background{
+    background-color: rgb(228, 228, 228);
+    border-radius: 5px;
+    color: black;
+    resize: both;
+    overflow:auto;
+}
+
+.background .gridContainer{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr 12fr;
+    gap: 0.3vmin;
+}
+
+.background .gridContainer .weekday{
+    padding-top: 1vh;
+    background-color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.background .gridTitles{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3vmin;
+    text-align: center;
+    align-items: center;
+    padding-top: 1vmin;
+    grid-column: 1 / span 7;
+}
+
+.background .gridTitles h1{
+    font-size: 16pt;
+    font-weight: 600;
+    color: #888888;
 }

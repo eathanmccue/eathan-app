@@ -1,8 +1,3 @@
-.page{
-    max-height: 40vh;
-    overflow: scroll;
-}
-
 .users{
     display: flex;
     flex-wrap: wrap;
@@ -10,11 +5,50 @@
     justify-content: center;
 }
 
-.cardUsername{
+.users .userCard{
+    max-width: 400px;
+    border: solid 8px;
+}
+
+.users .userCard .cardUsername{
     text-align: center;
     color: black;
 }
 
-.userCard{
-    max-width: 20vw;
+.users .userCard .buttonSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.addUserSection .header{
+    flex-direction: row;
+    align-items: center;
+}
+
+.addUserSection .header .icon{
+    margin: 10px;
+}
+
+.addUserSection .inputs{
+    text-align: center;
+}
+
+.addUserSection .inputs .colorInput{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addUserSection .inputs .colorInput > * {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 650px) {
+
+    .users{
+        flex-direction: column;
+    }
+
+    
 }

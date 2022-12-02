@@ -1,0 +1,54 @@
+.button{
+    color: white;
+    background-color: #67578b;
+    border-radius: 5px;
+    margin: 0px 5px 5px;
+    border: solid 1px;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.button .head{
+    background-color: rgba(0, 0, 0, 0.226);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.button .head p{
+    font-size: 17pt;
+}
+
+.button .body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: -10px;
+}
+
+.button .body .infoGrid{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px;
+}
+
+.button .body .infoGrid .icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button .body .infoGrid .info{
+    font-size: 12pt;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button .body .infoGrid #time{
+    font-size: 16pt;
+    font-weight: bold;
+}

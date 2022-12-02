@@ -1,5 +1,8 @@
 .app{
   background-color: #252031;
-  height: 100vh;
   color: #fff;
+  min-height: 100vh;
+  padding-bottom: 2vh;
 }
+
+
