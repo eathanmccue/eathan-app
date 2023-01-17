@@ -3,27 +3,30 @@ import './Viewport.css';
 import Appointment from './Appointment';
 
 export class Viewport extends Component {
-    
-    constructor(props){
-        super(props);
-
-        const apptArr = JSON.parse(localStorage.getItem("APPT_ARR"));
-
-        this.state = {
-            appts: apptArr
-        }
-    }
 
     renderDay(day){
         var dailySchedule = [];
 
-        this.state.appts.forEach(appt => {
-            if(day === this.getDayIndex(appt.day)){
-                dailySchedule.push(appt);
-            }
-        });
+        var apptArr = JSON.parse(localStorage.getItem("APPTS"));
 
-        return dailySchedule.map(this.mapToAppointment);
+        if(apptArr === null){
+            //no appts
+            return <></>;
+        }
+        else{
+            apptArr.forEach(appt => {
+                if(day === this.getDayIndex(appt.day)){ //only push for correct weekday
+                    dailySchedule.push(appt);
+                }
+            });
+        }
+        
+        if(dailySchedule[0] === null){
+            return null;
+        }
+        else{
+            return dailySchedule.map(this.mapToAppointment);
+        }
     }
 
     getDayIndex = (day) => {

@@ -3,48 +3,41 @@ import './Page.css';
 import Viewport from './Viewport';
 
 export class Schedule extends Component {
+  //constructor goes here
+  
+  /*
+  componentDidMount(){
+    var apptArr = JSON.parse(localStorage.getItem("APPTS"));
+    var usersArr = JSON.parse(localStorage.getItem("USERS"));
 
-  organizeSchedule(){
-    var arr = this.props.appts;
-    var day, index;
-    var sortedAppts = [[]];
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    const times = ["8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30"];
 
-    for(var i = 0; i < arr.length; i++){
-      day = arr[i].day;
-      
-      //assign day string to 2d array index
-      switch(day){
-        case "sun":
-          index = 0;
-          break;
-        case "mon":
-          index = 1;
-          break;
-        case "tue":
-          index = 2;
-          break;
-        case "wed":
-          index = 3;
-          break;
-        case "thu":
-          index = 4;
-          break;
-        case "fri":
-          index = 5;
-          break;
-        case "sat":
-          index = 6;
-          break;
-        default: index = 0;
-      }
-      console.log("index is" + index);
-      sortedAppts[index].push(arr[i]); // adds to 2d array
-    } // end of array loop
+    var day,time,newAppt;
+    
+    if(usersArr[0]){ // if users exist
+      usersArr.forEach((user) => {
+        day = Math.floor(Math.random() * 7);    // assign random day
+        time = Math.floor(Math.random() * 10);  // assign random time
 
-    // return organized 2d array
-    return sortedAppts;
+        //new appt object
+        newAppt = {
+          name: user.name,
+          email: user.email,
+          color: user.color,
+          day: days[day],
+          time: times[time]
+        };
+  
+        apptArr.push(newAppt);
+      });
+    }
+    
 
+    //save appts to local storage
+    localStorage.setItem("APPTS", JSON.stringify(apptArr));
   }
+  */
 
   render() {
     return (
