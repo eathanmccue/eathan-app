@@ -15,10 +15,6 @@ export class Users extends Component {
     }
   }
 
-  componentDidMount(){
-    
-  }
-
   toggleAddUserVisibility = () => {
     this.setState({
       addUserVisibility: !this.state.addUserVisibility
@@ -81,13 +77,18 @@ export class Users extends Component {
               <Button className="m-1">View appointments</Button>
             </div>
             
-            <Button className="m-1">Delete user</Button>
+            <Button className="m-1" onClick={this.deleteUser(index)}>Delete user</Button>
           </div>
             
         </Card.Body>
       </Card>
     );
-}
+  }
+
+  deleteUser = (index) => {
+    
+    //delete the user at index from array storage 
+  }
 
   render() {
     const userList = JSON.parse(localStorage.getItem("USERS"));
