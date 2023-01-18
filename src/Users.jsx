@@ -77,7 +77,7 @@ export class Users extends Component {
               <Button className="m-1">View appointments</Button>
             </div>
             
-            <Button className="m-1" onClick={this.deleteUser(index)}>Delete user</Button>
+            <Button className="m-1" id={index} onClick={this.deleteUser}>Delete user</Button>
           </div>
             
         </Card.Body>
@@ -85,9 +85,22 @@ export class Users extends Component {
     );
   }
 
-  deleteUser = (index) => {
+  deleteUser = (event) => {
     
-    //delete the user at index from array storage 
+    //delete the user at index from array storage
+    let userIndex = event.target.id;
+
+    //get user list
+    let userList = JSON.parse(localStorage.getItem("USERS"));
+
+    //splice first half of users up to index
+    userList.splice(userIndex, 1); // first param is index to be removed, 2nd is how many elements to remove
+
+    //update local storage
+    localStorage.setItem("USERS", JSON.stringify(userList));
+
+    //update display
+    this.forceUpdate();
   }
 
   render() {
