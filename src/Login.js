@@ -25,7 +25,7 @@ export default class Login extends Component {
             <>
                 <Nav loggedIn={false} username={this.props.username}/>
                 <Container className='login'>
-                    <Container className='mt-3'>
+                    <Container className='header'>
                         <h1>Log in</h1>
                     </Container>
                     
