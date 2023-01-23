@@ -18,6 +18,12 @@ export class Dashboard extends Component {
     }
   }
 
+  newAppt = () => {
+    this.setState({
+      pageId: "newAppt"
+    });
+  }
+
   handleClick = (event) => {
     this.setState({
       pageId: event.currentTarget.id
