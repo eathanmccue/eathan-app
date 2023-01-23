@@ -3,6 +3,9 @@ import { Card, Button, Form, Modal } from 'react-bootstrap';
 import { PlusLg, DashLg } from 'react-bootstrap-icons';
 import './Page.css';
 
+let id = -1;
+let name = "";
+
 export class Users extends Component {
 
 	constructor(props){
@@ -73,7 +76,7 @@ export class Users extends Component {
 					<Card.Subtitle className="text-muted mb-3">{user.name + "@website.com"}</Card.Subtitle>
 					<div className="buttonSection">
 						<div className='apptButtons'>
-							<Button className="m-1" onClick={() => this.handleModalShow(index)}>Appointment</Button>
+							<Button className="m-1" id={index} onClick={this.handleModalShow}>Appointment</Button>
 							<Button className="m-1">View appointments</Button>
 						</div>
 						
@@ -103,13 +106,14 @@ export class Users extends Component {
 		this.forceUpdate();
 	}
 
-	handleModalShow = (index) => {
+	handleModalShow = (event) => {
 		// show modal, update username for clicked user
 		this.setState({
 			showModal: true
 		});
 
-		localStorage.setItem('modalUser', index);
+		id = parseInt(event.target.id);
+		name = this.findUserList()[id].name
 	}
 
 	handleModalClose = () => {
@@ -121,22 +125,44 @@ export class Users extends Component {
 
 	handleModalSubmit = (event) => {
 		event.preventDefault();
+		console.log(event.target);
 
-		//add appt for userId in state
+		var date = event.target[0].value;
+		var time = event.target[1].value;
 
+		var userList = this.findUserList();
 
-		//remove userId from state, close modal
-		this.setState({
-			showModal: false
-		});
+		var newAppointment = {
+			user: userList[id],
+			date: date,
+			time: time
+		}
+
+		var appt_arr = JSON.parse(localStorage.getItem('APPTS'));
+		if(appt_arr.length > 0){
+			appt_arr.push(newAppointment);
+		}
+		else{ // appt arr no exist
+			appt_arr = []; // empty array
+			appt_arr.push(newAppointment);
+		}
+
+		//save new appointment array to local storage
+		//localStorage.setItem("APPT_ARR", JSON.stringify(appt_arr));
+		console.log(appt_arr);
+
+		localStorage.setItem("APPTS", JSON.stringify(appt_arr));
+
+		this.handleModalClose();
 	}
 
+	findUserList = () => {
+		var arr = JSON.parse(localStorage.getItem('USERS'));
+		return arr;
+	}
 
 	render() {
-		var userList = JSON.parse(localStorage.getItem("USERS"));
-		var modalIndex = parseInt(localStorage.getItem('modalUser'));
-		var modalUser = userList[modalIndex];
-		var modalName = modalUser.name;
+		var userList = this.findUserList();
 		return (
 			<>
 
@@ -191,10 +217,10 @@ export class Users extends Component {
 					<div className="modal">
 						<Modal show={this.state.showModal} onHide={this.handleModalClose}>
 							<Modal.Header closeButton>
-								<Modal.Title>New Appointment for: {modalName}</Modal.Title>
+								<Modal.Title>New Appointment for: {name} (ID#{id})</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-								<Form>
+								<Form onSubmit={this.handleModalSubmit}>
 									<Form.Group>
 										<Form.Control className='mb-2' type="date" />
 										<Form.Select className='mb-2'>
@@ -209,7 +235,7 @@ export class Users extends Component {
 									</Form.Group>
 									<Form.Group>
 										<Button className="m-2" variant="secondary" onClick={this.handleModalClose}>Close</Button>
-										<Button className="m-2" onSubmit={this.handleModalSubmit}>Submit</Button>
+										<Button className="m-2" type="submit">Submit</Button>
 									</Form.Group>
 								</Form>
 							</Modal.Body>

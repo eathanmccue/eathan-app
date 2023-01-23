@@ -11,6 +11,7 @@ export class Appointment extends Component {
             color: this.props.color,
             name: this.props.name,
             time: this.props.time,
+            date: null,
             infoVisible: false
         }
     }
