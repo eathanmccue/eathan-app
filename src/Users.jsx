@@ -66,6 +66,7 @@ export class Users extends Component {
 		color.value = "#67578b";
 
 		this.forceUpdate();
+		
 	}
 
 	mapToUsercard = (user, index) => {
@@ -154,6 +155,7 @@ export class Users extends Component {
 		localStorage.setItem("APPTS", JSON.stringify(appt_arr));
 
 		this.handleModalClose();
+		this.props.updatePage("users");
 	}
 
 	findUserList = () => {

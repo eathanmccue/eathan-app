@@ -3,7 +3,6 @@ import './Page.css';
 import Viewport from './Viewport';
 
 export class Schedule extends Component {
-  
 
   render() {
     return (
@@ -13,7 +12,7 @@ export class Schedule extends Component {
         </div>
 
         <div className="schedule">
-          <Viewport />
+          <Viewport renderWeekday={this.props.renderWeekday}/>
         </div>
       </>
     )

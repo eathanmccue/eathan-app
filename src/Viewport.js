@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import './Viewport.css';
-import Appointment from './Appointment';
+
 
 export class Viewport extends Component {
 
-    mapToAppointment = (appt, index) => {
-        return <Appointment name={appt.name} time={appt.time} color={appt.color} key={index} />
-    }
-
-    getAppointments = () => {
-        var appt_arr = JSON.parse(localStorage.getItem('APPTS'));
-        console.log(appt_arr);
-    }
+    
 
     render() {
+        
         return (
             <div className='background'>
                 <div className="gridContainer">
@@ -28,31 +22,31 @@ export class Viewport extends Component {
                     </div>
 
                     <div className='weekday' id="sun">
-                        {}
+                        {this.props.renderWeekday("sun")}
                     </div>
 
                     <div className='weekday' id="mon">
-                        {}
+                        {this.props.renderWeekday("mon")}
                     </div>
 
                     <div className='weekday' id="tue">
-                        {}
+                        {this.props.renderWeekday("tue")}
                     </div>
 
                     <div className='weekday' id="wed">
-                        {}
+                        {this.props.renderWeekday("wed")}
                     </div>
 
                     <div className='weekday' id="thu">
-                        {}
+                        {this.props.renderWeekday("thu")}
                     </div>
 
                     <div className='weekday' id="fri">
-                        {}
+                        {this.props.renderWeekday("fri")}
                     </div>
 
                     <div className='weekday' id="sat">
-                        {}
+                        {this.props.renderWeekday("sat")}
                     </div>
                     
                 </div>
