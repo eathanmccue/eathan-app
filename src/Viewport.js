@@ -2,69 +2,40 @@ import React, { Component } from 'react';
 import './Viewport.css';
 import Appointment from './Appointment';
 
+
+const day_arr = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+
 export class Viewport extends Component {
 
-    renderDay(day){
-        var dailySchedule = [];
-
-        var apptArr = JSON.parse(localStorage.getItem("APPTS"));
-
-        if(apptArr === null){
-            //no appts
-            return <></>;
-        }
-        else{
-            apptArr.forEach(appt => {
-                if(day === this.getDayIndex(appt.day)){ //only push for correct weekday
-                    dailySchedule.push(appt);
-                }
-            });
-        }
+    renderWeekday = (weekday) => {
+        var daily_appts = [];
+        var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
         
-        if(dailySchedule[0] === null){
-            return null;
+        for(var i = 0; i < weekly_appts.length; i++){
+            let apptDate = new Date("" + weekly_appts[i].date + "T00:00:00.000-08:00");
+            
+            if(apptDate.getDay() === day_arr.indexOf(weekday)){
+                daily_appts.push(weekly_appts[i]);
+                console.log("appt: ", weekly_appts[i]);
+            }
+            // DAILY APPTS POPULATED
         }
-        else{
-            return dailySchedule.map(this.mapToAppointment);
-        }
+    
+        // return all the appts from daily_appts as appointment components
+        return(<div>
+          {daily_appts.map((appt, index) => (
+            <Appointment name={appt.user.name} date={appt.date} time={appt.time} color={appt.user.color} key={index} />
+          ))}
+        </div>);
     }
-
-    getDayIndex = (day) => {
-        var dayIndex;
-        switch(day){
-            case "sun":
-                dayIndex = 0;
-                break;
-            case "mon":
-                dayIndex = 1;
-                break;
-            case "tue":
-                dayIndex = 2;
-                break;
-            case "wed":
-                dayIndex = 3;
-                break;
-            case "thu":
-                dayIndex = 4;
-                break;
-            case "fri":
-                dayIndex = 5;
-                break;
-            case "sat":
-                dayIndex = 6;
-                break;
-            default: 
-                dayIndex = 7;
-                break;
-        }
-        return dayIndex;
-    }
-
-    mapToAppointment = (appt, index) =>{
-        return <Appointment name={appt.name} time={appt.time} color={appt.color} key={index} />
+    
+    mapToAppointment = (appt, index) => {
+        return <Appointment name={appt.user.name} date={appt.date} time={appt.time} color={appt.user.color} key={index} />
     }
 
     render() {
+        
         return (
             <div className='background'>
                 <div className="gridContainer">
@@ -79,31 +50,31 @@ export class Viewport extends Component {
                     </div>
 
                     <div className='weekday' id="sun">
-                        {this.renderDay(0)}
+                        {this.renderWeekday("sun")}
                     </div>
 
                     <div className='weekday' id="mon">
-                        {this.renderDay(1)}
+                        {this.renderWeekday("mon")}
                     </div>
 
                     <div className='weekday' id="tue">
-                        {this.renderDay(2)}
+                        {this.renderWeekday("tue")}
                     </div>
 
                     <div className='weekday' id="wed">
-                        {this.renderDay(3)}
+                        {this.renderWeekday("wed")}
                     </div>
 
                     <div className='weekday' id="thu">
-                        {this.renderDay(4)}
+                        {this.renderWeekday("thu")}
                     </div>
 
                     <div className='weekday' id="fri">
-                        {this.renderDay(5)}
+                        {this.renderWeekday("fri")}
                     </div>
 
                     <div className='weekday' id="sat">
-                        {this.renderDay(6)}
+                        {this.renderWeekday("sat")}
                     </div>
                     
                 </div>

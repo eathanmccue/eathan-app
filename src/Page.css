@@ -44,6 +44,10 @@
     margin-right: 10px;
 }
 
+.modal{
+    margin-top: 20vh;
+}
+
 @media screen and (max-width: 650px) {
 
     .users{

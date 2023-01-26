@@ -10,10 +10,9 @@ export default class Login extends Component {
             username: null
         }
 
-        this.submitHandler = this.submitHandler.bind(this);
     }
 
-    submitHandler(event){
+    submitHandler = (event) => {
         event.preventDefault();
         //console.log(event);
         this.props.signIn(event.target[0].value);

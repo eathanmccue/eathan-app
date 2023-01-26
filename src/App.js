@@ -14,9 +14,21 @@ export class App extends Component {
 
   componentDidMount(){
 
-    if(localStorage.getItem("USERS") == null){
+    if(localStorage.getItem("USERS") === null){
       //upload to storage
       localStorage.setItem("USERS", JSON.stringify([]));
+    }
+
+    if(localStorage.getItem("APPTS") === null){
+      localStorage.setItem("APPTS", JSON.stringify([]));
+    }
+    
+    if(localStorage.getItem("modalUser") === null){
+      localStorage.setItem("modalUser", JSON.stringify(""));
+    }
+
+    if(localStorage.getItem("WEEKLY_APPTS") === null){
+      localStorage.setItem("WEEKLY_APPTS", JSON.stringify([]));
     }
   }
 
