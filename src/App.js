@@ -26,6 +26,10 @@ export class App extends Component {
     if(localStorage.getItem("modalUser") === null){
       localStorage.setItem("modalUser", JSON.stringify(""));
     }
+
+    if(localStorage.getItem("WEEKLY_APPTS") === null){
+      localStorage.setItem("WEEKLY_APPTS", JSON.stringify([]));
+    }
   }
 
   signIn = (newUser) => {

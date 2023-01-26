@@ -154,8 +154,10 @@ export class Users extends Component {
 
 		localStorage.setItem("APPTS", JSON.stringify(appt_arr));
 
+		//update schedule to recalculate weekly appts
+		this.props.updateSchedule();
+
 		this.handleModalClose();
-		this.props.updatePage("users");
 	}
 
 	findUserList = () => {
