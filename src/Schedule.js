@@ -3,16 +3,14 @@ import './Page.css';
 import Viewport from './Viewport';
 
 
-
-
 export class Schedule extends Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-		scheduleReloadFlag: this.props.updateScheduleFlag,
-        daily_appointment_array: []
+		  scheduleReloadFlag: this.props.updateScheduleFlag,
+      daily_appointment_array: []
     };
 
   }
