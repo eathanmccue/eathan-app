@@ -25,13 +25,9 @@ export class Viewport extends Component {
         // return all the appts from daily_appts as appointment components
         return(<div>
           {daily_appts.map((appt, index) => (
-            <Appointment name={appt.user.name} date={appt.date} time={appt.time} color={appt.user.color} key={index} />
+            <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} />
           ))}
         </div>);
-    }
-    
-    mapToAppointment = (appt, index) => {
-        return <Appointment name={appt.user.name} date={appt.date} time={appt.time} color={appt.user.color} key={index} />
     }
 
     render() {

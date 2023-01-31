@@ -3,8 +3,7 @@ import { Card, Button, Form, Modal } from 'react-bootstrap';
 import { PlusLg, DashLg } from 'react-bootstrap-icons';
 import './Page.css';
 
-let id = -1;
-let name = "";
+let randomNames = ["Lizet", "Jaleel", "Earl", "Wilfredo", "Darrin", "Angel", "Fredy", "Matthew", "Jaelynn", "Carli", "Abby", "Hunter", "Mackenzi", "Cheyenne", "Hugh", "Markus", "Loren", "Keegan", "Genesis", "Rashawn", "Benny", "Livia", "Kendyl", "Asa", "Joe", "Mckenzie", "Jaila", "Timothy", "Myra", "Heath", "Dalila", "Mckinley", "Laisha", "Emalee", "Skyler", "Augustus", "Devonte", "Fredrick", "Davonte", "Jared", "Shae", "Alina", "Titus", "Alice", "Autumn", "Jaden", "Turner", "Bryan", "Abraham", "Ann", "Sammy", "Toby", "Devon", "Jaquez", "Denzel", "Isaak", "Carleigh", "Karl", "Raul", "Courtney", "Quinlan", "Kevon", "Stormy", "Colt", "Charlotte", "Trever", "Henry", "Rhianna", "Tyla", "Jameson", "Menachem", "Dymond", "Braulio", "Benjamin", "Santiago", "Marjorie", "Analise", "Paloma", "Justin", "Johnathon", "Kourtney", "Tracy", "Elizabeth", "Leonard", "Tatianna", "Kyleigh", "Kristen", "Nikhil", "Pierce", "Daphne", "Ivanna", "Montana", "Dahlia", "Jorge", "Dale", "Rashad", "Lorenzo", "Oscar", "Brock", "Teresa"];
 
 export class Users extends Component {
 
@@ -15,9 +14,52 @@ export class Users extends Component {
 			addUserVisibility: false,
 			addApptVisibility: true,
 			newUserColor: "#67578b",
-			showModal: false
+			showModal: false,
+			modalUser: {}
 		}
 	}
+
+	getUserId = () => {
+        var takenIds = []; // empty array
+        //get current appointments as array
+        let userList = JSON.parse(localStorage.getItem('USERS'));
+
+        //random number 0-999
+        let randomInt = Math.floor(Math.random() * 1000);
+
+        //loop through appts, established taken ids
+        for(var i = 0; i < userList.length; i++){
+            takenIds.push(userList[i].id); // add to taken ids array
+        }
+
+        while(userList.includes(randomInt)){
+            //id taken, generate new number
+            randomInt = Math.floor(Math.random() * 1000);
+        }
+        
+        return randomInt;
+    }
+
+	getApptId = () => {
+        var takenIds = []; // empty array
+        //get current appointments as array
+        let apptList = JSON.parse(localStorage.getItem('APPTS'));
+
+        //random number 0-999
+        let randomInt = Math.floor(Math.random() * 1000);
+
+        //loop through appts, established taken ids
+        for(var i = 0; i < apptList.length; i++){
+            takenIds.push(apptList[i].id); // add to taken ids array
+        }
+
+        while(apptList.includes(randomInt)){
+            //id taken, generate new number
+            randomInt = Math.floor(Math.random() * 1000);
+        }
+        
+        return randomInt;
+    }
 
 	toggleAddUserVisibility = () => {
 		this.setState({
@@ -73,15 +115,15 @@ export class Users extends Component {
 		return(
 			<Card className="userCard m-3" key={index} style={{borderColor: user.color}}>
 				<Card.Body>
-					<Card.Title className="cardUsername">{user.name + "[" + index + "]"}</Card.Title>
+					<Card.Title className="cardUsername">{user.name + "[" + user.id + "]"}</Card.Title>
 					<Card.Subtitle className="text-muted mb-3">{user.name + "@website.com"}</Card.Subtitle>
 					<div className="buttonSection">
 						<div className='apptButtons'>
-							<Button className="m-1" id={index} onClick={this.handleModalShow}>Appointment</Button>
+							<Button className="m-1" id={user.id} onClick={this.handleModalShow}>Appointment</Button>
 							<Button className="m-1">View appointments</Button>
 						</div>
 						
-						<Button className="m-1" id={index} onClick={this.deleteUser}>Delete user</Button>
+						<Button className="m-1" id={user.id} onClick={this.deleteUser}>Delete user</Button>
 					</div>
 					
 				</Card.Body>
@@ -108,25 +150,37 @@ export class Users extends Component {
 	}
 
 	handleModalShow = (event) => {
-		// show modal, update username for clicked user
-		this.setState({
-			showModal: true
-		});
+		let userId = event.target.id;
 
-		id = parseInt(event.target.id);
-		name = this.findUserList()[id].name
+		let userList = this.findUserList();
+
+		var selectedUser = {};
+		
+		for(var i = 0; i < userList.length; i++){
+			if(userList[i].id === parseInt(userId)){
+				selectedUser = userList[i];
+				i = userList.length - 1; // finish loop
+			}
+		}
+
+		// show modal
+		this.setState({
+			showModal: true,
+			modalUser: selectedUser
+		});
 	}
 
 	handleModalClose = () => {
 		// hide modal
 		this.setState({
-			showModal: false
+			showModal: false,
+			selectedUser: {}
 		});
 	}
 
 	handleModalSubmit = (event) => {
 		event.preventDefault();
-		console.log(event.target);
+		//console.log(event.target);
 
 		var date = event.target[0].value;
 		var time = event.target[1].value;
@@ -134,30 +188,48 @@ export class Users extends Component {
 		var userList = this.findUserList();
 
 		var newAppointment = {
-			user: userList[id],
+			id: this.getUserId(),
+			user: this.state.modalUser,
 			date: date,
 			time: time
 		}
 
-		var appt_arr = JSON.parse(localStorage.getItem('APPTS'));
-		if(appt_arr.length > 0){
-			appt_arr.push(newAppointment);
-		}
-		else{ // appt arr no exist
-			appt_arr = []; // empty array
-			appt_arr.push(newAppointment);
-		}
+		var apptList = JSON.parse(localStorage.getItem('APPTS'));
 
-		//save new appointment array to local storage
-		//localStorage.setItem("APPT_ARR", JSON.stringify(appt_arr));
-		console.log(appt_arr);
+		//add new appointment to array
+		apptList.push(newAppointment);
 
-		localStorage.setItem("APPTS", JSON.stringify(appt_arr));
+		//save array to storage
+		localStorage.setItem("APPTS", JSON.stringify(apptList));
 
 		//update schedule to recalculate weekly appts
 		this.props.updateSchedule();
 
 		this.handleModalClose();
+	}
+
+	generateRandomUser = () => {
+		var randomInt = Math.floor(Math.random() * 100);
+		const username = randomNames[randomInt];
+		console.log(randomNames[randomInt]);
+		const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+		//new user obj
+		var newUser = {
+			id: this.getUserId(),
+			name: username,
+			email: username + "@random.com",
+			color: randomColor
+		}
+
+		var userList = this.findUserList();
+
+		//add new user to new array
+		userList.push(newUser);
+
+		//save new array to local storage
+		localStorage.setItem("USERS", JSON.stringify(userList));
+
+		this.forceUpdate();
 	}
 
 	findUserList = () => {
@@ -206,6 +278,7 @@ export class Users extends Component {
 										Add
 									</Button>
 								</Form.Group>
+								<p onClick={this.generateRandomUser}>random user</p>
 							</Form>
 						</div>
 					</div> :
@@ -221,7 +294,7 @@ export class Users extends Component {
 					<div className="modal">
 						<Modal show={this.state.showModal} onHide={this.handleModalClose}>
 							<Modal.Header closeButton>
-								<Modal.Title>New Appointment for: {name} (ID#{id})</Modal.Title>
+								<Modal.Title>New Appointment for: </Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
 								<Form onSubmit={this.handleModalSubmit}>

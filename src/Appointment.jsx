@@ -7,14 +7,17 @@ export class Appointment extends Component {
     constructor(props){
         super(props);
 
+        // adding id to properly identify
         this.state = {
-            color: this.props.color,
-            name: this.props.name,
+            id: this.props.id,
+            user: this.props.user,
+            date: this.props.date,
             time: this.props.time,
-            date: null,
             infoVisible: false
         }
     }
+
+    
 
     toggleInfo = (event) => {
         this.setState({
@@ -37,14 +40,17 @@ export class Appointment extends Component {
         <div className='info' id="info">
             {"location"}
         </div>
+        <div className='info'>
+            <p>{this.state.id}</p>
+        </div>
         </>
 
         return (
-        <div className="button" style={{backgroundColor: this.state.color}}>
+        <div className="button" style={{backgroundColor: this.state.user.color}}>
 
             <div className="head">
                 <div className='flexbox'>
-                    <p>{this.state.name}</p>
+                    <p>{this.state.user.name}</p>
                     <PencilSquare className="editIcon" size={20} />
                     {
                         // add onclick method to pencil square icon to bring up modal for editing appt info
