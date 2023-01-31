@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Appointment.css';
-import { Clock, InfoCircle, Telephone, Geo, ChevronDown, ChevronUp } from 'react-bootstrap-icons';
+import { Clock, InfoCircle, Telephone, Geo, ChevronDown, ChevronUp, PencilSquare } from 'react-bootstrap-icons';
 
 export class Appointment extends Component {
 
@@ -43,7 +43,13 @@ export class Appointment extends Component {
         <div className="button" style={{backgroundColor: this.state.color}}>
 
             <div className="head">
-                <p>{this.state.name}</p>
+                <div className='flexbox'>
+                    <p>{this.state.name}</p>
+                    <PencilSquare className="editIcon" size={20} />
+                    {
+                        // add onclick method to pencil square icon to bring up modal for editing appt info
+                    }
+                </div>
             </div>
 
             <div className="body">

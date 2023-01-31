@@ -2,29 +2,47 @@
     color: white;
     background-color: #67578b;
     border-radius: 5px;
-    margin: 0px 5px 5px;
+    margin: 0px 5px;
     border: solid 1px;
     text-align: left;
-    padding-bottom: 10px;
+    display: block;
 }
 
 .button .head{
     background-color: rgba(0, 0, 0, 0.226);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    padding-left: 10px;
+    border: solid red;
+    display: block;
     width: 100%;
 }
 
+.button .head .flexbox{
+    display: flex;
+}
+
+.button .head .editIcon{
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.button .head .editIcon:hover{
+    cursor: pointer;
+}
+
 .button .head p{
-    font-size: 17pt;
+    font-size: 18pt;
+    padding-left: 5px;
+    display: inline;
 }
 
 .button .body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-top: -10px;
+    padding: 5px 0;
+    border: solid purple;
 }
 
 .button .body .infoGrid{
@@ -51,4 +69,8 @@
 .button .body .infoGrid #time{
     font-size: 16pt;
     font-weight: bold;
+}
+
+#info:hover{
+    cursor: pointer;
 }
