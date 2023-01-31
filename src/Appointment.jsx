@@ -51,7 +51,9 @@ export class Appointment extends Component {
             <div className="head">
                 <div className='flexbox'>
                     <p>{this.state.user.name}</p>
-                    <PencilSquare className="editIcon" size={20} />
+                    <PencilSquare className="editIcon" size={20} onClick={() => {
+                        this.props.showModal(this.state.id);
+                    }}/>
                     {
                         // add onclick method to pencil square icon to bring up modal for editing appt info
                     }

@@ -17,7 +17,7 @@ export class Viewport extends Component {
             
             if(apptDate.getDay() === day_arr.indexOf(weekday)){
                 daily_appts.push(weekly_appts[i]);
-                console.log("appt: ", weekly_appts[i]);
+                //console.log("appt: ", weekly_appts[i]);
             }
             // DAILY APPTS POPULATED
         }
@@ -25,7 +25,7 @@ export class Viewport extends Component {
         // return all the appts from daily_appts as appointment components
         return(<div>
           {daily_appts.map((appt, index) => (
-            <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} />
+            <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} showModal={this.props.showModal} />
           ))}
         </div>);
     }

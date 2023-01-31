@@ -1,21 +1,55 @@
 import React, { Component } from 'react'
 import './Page.css';
 import Viewport from './Viewport';
-
+import { Modal, Form, Button } from 'react-bootstrap';
 
 export class Schedule extends Component {
+
 
   constructor(props){
     super(props);
 
     this.state = {
-		  scheduleReloadFlag: this.props.updateScheduleFlag,
-      daily_appointment_array: []
+		scheduleReloadFlag: this.props.updateScheduleFlag,
+		daily_appointment_array: [],
+		showModalFlag: false,
+		modalAppt: {
+			user: {name:"", id: ""}
+		}
     };
-
   }
 
-  findWeeklyAppts(){
+  handleModalShow = (id) => {
+	this.setState({
+		showModalFlag: true
+	});
+
+	//console.log(id);
+
+	var apptList = JSON.parse(localStorage.getItem("APPTS"));
+
+	for(var i = 0; i < apptList.length; i++){
+		if(apptList[i].id === id){
+			this.setState({
+				modalAppt: apptList[i]
+			});
+		}
+	}
+  }
+
+  handleModalClose = () => {
+	this.setState({
+		showModalFlag: false
+	});
+  }
+
+  handleModalSubmit = (event) => {
+	event.preventDefault();
+
+	
+  }
+
+  findWeeklyAppts = () => {
 	//get all appts from local storage
 	var appt_arr = JSON.parse(localStorage.getItem('APPTS'));
 
@@ -55,7 +89,7 @@ export class Schedule extends Component {
                         weekly_appts.push(appt_arr[i]);
                     }
                     // WEEKLY ARRAY POPULATED
-					console.log('weekly array calculated! resulting array: ', weekly_appts);
+					//console.log('weekly array calculated! resulting array: ', weekly_appts);
 					localStorage.setItem('WEEKLY_APPTS', JSON.stringify(weekly_appts));
                 }
             }
@@ -64,18 +98,55 @@ export class Schedule extends Component {
     }
   }
 
+  getModalNameId = () => {
+	var appt = this.state.modalAppt;
+	var user = appt.user;
+	var name = user.name;
+	var id = user.id;
+
+	return (name + " ID#" + id);
+  }
+
   render() {
 	this.findWeeklyAppts();
     return (
-      <>
-        <div className="header">
-          	<h2>Schedule</h2>
-        </div>
+		<>
+			<div className="header">
+				<h2>Schedule</h2>
+			</div>
 
-        <div className="schedule">
-        	<Viewport renderWeekday={this.renderWeekday}/>
-        </div>
-      </>
+			<div className="schedule">
+				<div className="modal">
+					<Modal show={this.state.showModalFlag} onHide={this.handleModalClose}>
+						<Modal.Header closeButton>
+							<Modal.Title>Edit Appointment for: {this.getModalNameId()}</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<Form onSubmit={this.handleModalSubmit}>
+								<Form.Group>
+									<Form.Control className='mb-2' type="date" />
+									<Form.Select className='mb-2'>
+										<option>12:00</option>
+										<option>1:00</option>
+										<option>2:00</option>
+										<option>4:00</option>
+										<option>5:00</option>
+										<option>6:00</option>
+										<option>7:00</option>
+									</Form.Select>
+								</Form.Group>
+								<Form.Group>
+									<Button className="m-2" variant="secondary" onClick={this.handleModalClose}>Close</Button>
+									<Button className="m-2" type="submit">Submit</Button>
+								</Form.Group>
+							</Form>
+						</Modal.Body>
+					</Modal>
+				</div>
+
+				<Viewport renderWeekday={this.renderWeekday} showModal={this.handleModalShow} />
+			</div>
+		</>
     )
   }
 }
