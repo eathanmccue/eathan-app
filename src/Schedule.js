@@ -46,7 +46,16 @@ export class Schedule extends Component {
   handleModalSubmit = (event) => {
 	event.preventDefault();
 
+	//find fields and make variables for inputs
+	var dateInput = event.target.parentNode.children[0][0];
+	var timeInput = event.target.parentNode.children[0][1];
 	
+	dateInput.defaultValue = this.state.modalAppt.date;
+	timeInput.defaultValue = this.state.modalAppt.time;
+
+	console.log(dateInput.defaultValue, timeInput.defaultValue);
+	
+	this.handleModalClose();
   }
 
   findWeeklyAppts = () => {
@@ -124,8 +133,8 @@ export class Schedule extends Component {
 						<Modal.Body>
 							<Form onSubmit={this.handleModalSubmit}>
 								<Form.Group>
-									<Form.Control className='mb-2' type="date" />
-									<Form.Select className='mb-2'>
+									<Form.Control className='mb-2' type="date" defaultValue={this.state.modalAppt.date} />
+									<Form.Select className='mb-2' defaultValue={this.state.modalAppt.time}>
 										<option>12:00</option>
 										<option>1:00</option>
 										<option>2:00</option>
