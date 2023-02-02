@@ -14,8 +14,11 @@ export class Schedule extends Component {
 		daily_appointment_array: [],
 		showModalFlag: false,
 		modalAppt: {
-			user: {name:"", id: ""}
-		}
+			user: {name:"", id: ""},
+			date: "",
+			time: ""
+		},
+		viewportReloadFlag: 3
     };
   }
 
@@ -29,7 +32,9 @@ export class Schedule extends Component {
 	var apptList = JSON.parse(localStorage.getItem("APPTS"));
 
 	for(var i = 0; i < apptList.length; i++){
-		if(apptList[i].id === id){
+		//console.log("apptList[i].id = " + apptList[i].id);
+		//console.log("id = " + id);
+		if(String(apptList[i].id) === String(id)){
 			this.setState({
 				modalAppt: apptList[i]
 			});
@@ -53,9 +58,64 @@ export class Schedule extends Component {
 	dateInput.defaultValue = this.state.modalAppt.date;
 	timeInput.defaultValue = this.state.modalAppt.time;
 
-	console.log(dateInput.defaultValue, timeInput.defaultValue);
-	
-	this.handleModalClose();
+	//replace appointment
+	var apptId = this.state.modalAppt.id;
+
+	//console.log(apptId);
+
+	var apptList = JSON.parse(localStorage.getItem("APPTS"));
+	var newList = [];
+
+	for(var i = 0; i < apptList.length; i++){
+		if(apptList[i].id === apptId){
+			//console.log("appt found with id: " + apptList[i].id);
+			//change data
+			var editedAppt = {
+				id: apptList[i].id,
+				user: apptList[i].user,
+				date: dateInput.value,
+				time: timeInput.value
+			};
+			
+			console.log("appt " + apptList[i].id + " changed successfully");
+			newList.push(editedAppt);
+		}
+		else{
+			newList.push(apptList[i]);
+		}
+	}
+
+	localStorage.setItem("APPTS", JSON.stringify(newList));
+
+	this.setState({
+		showModalFlag: false,
+		modalAppt: {
+			user: {name:"", id: ""},
+			date: "",
+			time: "",
+			viewportReloadFlag: this.state.viewportReloadFlag * 13
+		} 
+	});
+  }
+
+  deleteAppt = (id) => {
+	//get appts
+	var apptList = JSON.parse(localStorage.getItem("APPTS"));
+	var newApptArr = [];
+
+	for(var i = 0; i < apptList.length; i++){
+		if(apptList[i].id === id){
+			//deleted element dont add
+		}
+		else{
+			newApptArr.push(apptList[i]);
+		}
+	}
+
+	// save to localstorage
+	localStorage.setItem("APPTS", JSON.stringify(newApptArr));
+
+	this.forceUpdate();
   }
 
   findWeeklyAppts = () => {
@@ -153,7 +213,7 @@ export class Schedule extends Component {
 					</Modal>
 				</div>
 
-				<Viewport renderWeekday={this.renderWeekday} showModal={this.handleModalShow} />
+				<Viewport reloadFlag={this.state.viewportReloadFlag} renderWeekday={this.renderWeekday} showModal={this.handleModalShow} />
 			</div>
 		</>
     )

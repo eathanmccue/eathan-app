@@ -8,6 +8,14 @@ const day_arr = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
 export class Viewport extends Component {
 
+    constructor(props){
+        super(props);
+
+        this.state = {
+            reloadFlag: props.reloadFlag
+        };
+    }
+
     renderWeekday = (weekday) => {
         var daily_appts = [];
         var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
@@ -25,7 +33,7 @@ export class Viewport extends Component {
         // return all the appts from daily_appts as appointment components
         return(<div>
           {daily_appts.map((appt, index) => (
-            <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} showModal={this.props.showModal} />
+            <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} showModal={this.props.showModal} reloadFlag={this.state.reloadFlag} />
           ))}
         </div>);
     }

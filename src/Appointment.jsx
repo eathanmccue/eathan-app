@@ -13,7 +13,8 @@ export class Appointment extends Component {
             user: this.props.user,
             date: this.props.date,
             time: this.props.time,
-            infoVisible: false
+            infoVisible: false,
+            reloadFlag: this.props.reloadFlag
         }
     }
 
