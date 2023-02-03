@@ -88,17 +88,21 @@ export class Schedule extends Component {
 
 	localStorage.setItem("APPTS", JSON.stringify(newList));
 
+	//this.findWeeklyAppts();
+
 	this.setState({
 		showModalFlag: false,
 		modalAppt: {
 			user: {name:"", id: ""},
 			date: "",
 			time: "",
-			viewportReloadFlag: this.state.viewportReloadFlag * 13
+			viewportReloadFlag: this.state.viewportReloadFlag * 13,
+			weekly_appts: JSON.parse(localStorage.getItem("WEEKLY_APPTS"))
 		} 
 	});
 
-	this.findWeeklyAppts();
+	this.props.updateDash();
+
   }
 
   deleteAppt = (id) => {
@@ -163,9 +167,7 @@ export class Schedule extends Component {
                     // WEEKLY ARRAY POPULATED
 					//console.log('weekly array calculated! resulting array: ', weekly_appts);
 					localStorage.setItem('WEEKLY_APPTS', JSON.stringify(weekly_appts));
-					this.setState({
-						weekly_appts: weekly_appts
-					});
+					
                 }
             }
         }

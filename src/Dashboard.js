@@ -45,6 +45,10 @@ export class Dashboard extends Component {
     // when scheduleReload changes, schedule component will be re rendered
   }
 
+  updateDash = () => {
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <>
@@ -82,7 +86,7 @@ export class Dashboard extends Component {
             </div>
 
             <div className="renderArea">
-              {this.state.pageId === "schedule" ? <Schedule updateScheduleFlag={this.state.scheduleReloadFlag} /> : null }
+              {this.state.pageId === "schedule" ? <Schedule updateDash={this.updateDash} updateScheduleFlag={this.state.scheduleReloadFlag} /> : null }
               {this.state.pageId === "users" ? <Users updateSchedule={this.updateSchedule} /> : null }
               {this.state.pageId === "portal" ? <Portal /> : null }
               {this.state.pageId === "settings" ? <Settings logout={this.props.logout}/> : null }
