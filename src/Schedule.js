@@ -18,7 +18,8 @@ export class Schedule extends Component {
 			date: "",
 			time: ""
 		},
-		viewportReloadFlag: 3
+		viewportReloadFlag: 3,
+		weekly_appts: JSON.parse(localStorage.getItem("WEEKLY_APPTS"))
     };
   }
 
@@ -96,6 +97,8 @@ export class Schedule extends Component {
 			viewportReloadFlag: this.state.viewportReloadFlag * 13
 		} 
 	});
+
+	this.findWeeklyAppts();
   }
 
   deleteAppt = (id) => {
@@ -160,6 +163,9 @@ export class Schedule extends Component {
                     // WEEKLY ARRAY POPULATED
 					//console.log('weekly array calculated! resulting array: ', weekly_appts);
 					localStorage.setItem('WEEKLY_APPTS', JSON.stringify(weekly_appts));
+					this.setState({
+						weekly_appts: weekly_appts
+					});
                 }
             }
         }
@@ -177,7 +183,7 @@ export class Schedule extends Component {
   }
 
   render() {
-	this.findWeeklyAppts();
+	//this.findWeeklyAppts();
     return (
 		<>
 			<div className="header">
@@ -213,7 +219,7 @@ export class Schedule extends Component {
 					</Modal>
 				</div>
 
-				<Viewport reloadFlag={this.state.viewportReloadFlag} renderWeekday={this.renderWeekday} showModal={this.handleModalShow} />
+				<Viewport reloadFlag={this.state.viewportReloadFlag} showModal={this.handleModalShow} weekly_appts={this.state.weekly_appts} />
 			</div>
 		</>
     )

@@ -12,19 +12,20 @@ export class Viewport extends Component {
         super(props);
 
         this.state = {
-            reloadFlag: props.reloadFlag
+            reloadFlag: this.props.reloadFlag,
+            weekly_appts: this.props.weekly_appts
         };
     }
 
     renderWeekday = (weekday) => {
         var daily_appts = [];
-        var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
+        //var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
         
-        for(var i = 0; i < weekly_appts.length; i++){
-            let apptDate = new Date("" + weekly_appts[i].date + "T00:00:00.000-08:00");
+        for(var i = 0; i < this.state.weekly_appts.length; i++){
+            let apptDate = new Date("" + this.state.weekly_appts[i].date + "T00:00:00.000-08:00");
             
             if(apptDate.getDay() === day_arr.indexOf(weekday)){
-                daily_appts.push(weekly_appts[i]);
+                daily_appts.push(this.state.weekly_appts[i]);
                 //console.log("appt: ", weekly_appts[i]);
             }
             // DAILY APPTS POPULATED
