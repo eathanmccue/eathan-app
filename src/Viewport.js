@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './Viewport.css';
 import Appointment from './Appointment';
 
-
-const day_arr = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-
-
 export class Viewport extends Component {
 
     constructor(props){
@@ -17,26 +13,77 @@ export class Viewport extends Component {
         };
     }
 
-    renderWeekday = (weekday) => {
-        var daily_appts = [];
-        //var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
-        
-        for(var i = 0; i < this.state.weekly_appts.length; i++){
-            let apptDate = new Date("" + this.state.weekly_appts[i].date + "T00:00:00.000-08:00");
+    renderWeekday = (index) => {
+        /*
+        var weekly_appts = JSON.parse(localStorage.getItem("WEEKLY_APPTS"));
+        var organizedDailyArray = [
+            [],[],[],[],[],[],[]
+        ];
+        for(var j = 0; j < day_arr.length; j++){
+            var weekday = day_arr[j];
+
+            var daily_appts = [];
+            var dayOfTheWeek = day_arr.indexOf(weekday);
+            //var weekly_appts = JSON.parse(localStorage.getItem('WEEKLY_APPTS'));
             
-            if(apptDate.getDay() === day_arr.indexOf(weekday)){
-                daily_appts.push(this.state.weekly_appts[i]);
-                //console.log("appt: ", weekly_appts[i]);
+            for(var i = 0; i < weekly_appts.length; i++){
+                let apptDate = new Date("" + weekly_appts[i].date + "T00:00:00.000-08:00");
+                
+                if(apptDate.getDay() === dayOfTheWeek){
+                    daily_appts.push(weekly_appts[i]);
+                    //console.log("appt: ", weekly_appts[i]);
+                }
+                // DAILY APPTS POPULATED
+                // assign to organized array
+                organizedDailyArray[0][j] = daily_appts;
+                
             }
-            // DAILY APPTS POPULATED
+            //console.log("daily appts for " + weekday + " added:", organizedDailyArray[j]);
         }
+        
     
         // return all the appts from daily_appts as appointment components
         return(<div>
-          {daily_appts.map((appt, index) => (
+          {organizedDailyArray[0][index].map((appt, index) => (
             <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} showModal={this.props.showModal} reloadFlag={this.state.reloadFlag} />
           ))}
         </div>);
+        */
+
+        // Organize weekly array into days.
+
+        //get weekly appointments
+        var weekly_appts = JSON.parse(localStorage.getItem("WEEKLY_APPTS"));
+        var daily_arr = [];
+
+        if(weekly_appts.length === 0){
+            console.log("NO APPTS!!!!!");
+            return;
+            // no appts this week
+        }
+        // there is appts this week! :D
+        for(var i = 0; i < weekly_appts.length; i++){
+            //console.log(weekly_appts[i]);
+            var apptDateObject = new Date("" + weekly_appts[i].date + "T00:00:00.000-08:00");
+
+            if(apptDateObject.getDay() === parseInt(index)){
+                // add to daily array
+                daily_arr.push(weekly_appts[i]);
+            }
+            else{
+                continue;
+            }
+        }
+        // weekly appts exhausted
+        // return daily array mapped to appointment components
+        return(
+            <div>
+                {daily_arr.map((appt, index) => (
+                    <Appointment id={appt.id} user={appt.user} date={appt.date} time={appt.time} key={index} showModal={this.props.showModal} updateDash={this.props.updateDash} />
+                ))}
+            </div>
+        )
+
     }
 
     render() {
@@ -55,31 +102,31 @@ export class Viewport extends Component {
                     </div>
 
                     <div className='weekday' id="sun">
-                        {this.renderWeekday("sun")}
+                        {this.renderWeekday(0)}
                     </div>
 
                     <div className='weekday' id="mon">
-                        {this.renderWeekday("mon")}
+                        {this.renderWeekday(1)}
                     </div>
 
                     <div className='weekday' id="tue">
-                        {this.renderWeekday("tue")}
+                        {this.renderWeekday(2)}
                     </div>
 
                     <div className='weekday' id="wed">
-                        {this.renderWeekday("wed")}
+                        {this.renderWeekday(3)}
                     </div>
 
                     <div className='weekday' id="thu">
-                        {this.renderWeekday("thu")}
+                        {this.renderWeekday(4)}
                     </div>
 
                     <div className='weekday' id="fri">
-                        {this.renderWeekday("fri")}
+                        {this.renderWeekday(5)}
                     </div>
 
                     <div className='weekday' id="sat">
-                        {this.renderWeekday("sat")}
+                        {this.renderWeekday(6)}
                     </div>
                     
                 </div>

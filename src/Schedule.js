@@ -18,8 +18,7 @@ export class Schedule extends Component {
 			date: "",
 			time: ""
 		},
-		viewportReloadFlag: 3,
-		weekly_appts: JSON.parse(localStorage.getItem("WEEKLY_APPTS"))
+		viewportReloadFlag: 3
     };
   }
 
@@ -86,22 +85,13 @@ export class Schedule extends Component {
 		}
 	}
 
+	//update appts in storage
+	localStorage.removeItem("APPTS");
 	localStorage.setItem("APPTS", JSON.stringify(newList));
 
-	//this.findWeeklyAppts();
+	this.props.updateDash(); // reload dash, re find weekly appts
 
-	this.setState({
-		showModalFlag: false,
-		modalAppt: {
-			user: {name:"", id: ""},
-			date: "",
-			time: "",
-			viewportReloadFlag: this.state.viewportReloadFlag * 13,
-			weekly_appts: JSON.parse(localStorage.getItem("WEEKLY_APPTS"))
-		} 
-	});
-
-	this.props.updateDash();
+	this.handleModalClose();
 
   }
 
@@ -125,56 +115,6 @@ export class Schedule extends Component {
 	this.forceUpdate();
   }
 
-  findWeeklyAppts = () => {
-	//get all appts from local storage
-	var appt_arr = JSON.parse(localStorage.getItem('APPTS'));
-
-	//create array for this weeks appts
-	var weekly_appts = [];
-
-    //find current week
-    const todaysDate = new Date();
-    
-    //for each appointment in localstorage
-    for(var i = 0; i < appt_arr.length; i++){
-        
-		//assign date object for the appointment
-        var appointmentDate = new Date("" + appt_arr[i].date + "T00:00:00.000-08:00");
-        var time_arr = appt_arr[i].time.split(":");
-        time_arr[0] = (parseInt(time_arr[0]) + 8) % 24; // adjust for UTC conversion
-        appointmentDate.setUTCHours(time_arr[0], time_arr[1]); // sets hours, mins
-
-		//check if dates match
-        if(todaysDate.getFullYear() === appointmentDate.getFullYear()){
-            // year is same , woohoo!
-            if(todaysDate.getMonth() === appointmentDate.getMonth()){
-                // month is same, great success
-                // check if the day is in the same week (sun -> sat)
-                //var dayOfTheWeek = todaysDate.getDay(); // 0-6
-                //var dayOfTheMonth = todaysDate.getDate(); // 1-31
-
-                // if the date of the appt is within todays week
-                if(Math.abs(todaysDate.getDate() - appointmentDate.getDate()) < 7){
-                    // could possibly be within the week
-                    var startingWeekOffset = todaysDate.getDay(); // (sun = 0, mon = 1, etc...)
-                    var endingWeekOffset = 6 - startingWeekOffset;
-
-                    if(appointmentDate.getDate() >= (todaysDate.getDate() - startingWeekOffset) && appointmentDate.getDate() <= (todaysDate.getDate() + endingWeekOffset)){
-                        // date is within same sun->sat as today
-                        // add it to weekly appts arr
-                        weekly_appts.push(appt_arr[i]);
-                    }
-                    // WEEKLY ARRAY POPULATED
-					//console.log('weekly array calculated! resulting array: ', weekly_appts);
-					localStorage.setItem('WEEKLY_APPTS', JSON.stringify(weekly_appts));
-					
-                }
-            }
-        }
-
-    }
-  }
-
   getModalNameId = () => {
 	var appt = this.state.modalAppt;
 	var user = appt.user;
@@ -185,7 +125,6 @@ export class Schedule extends Component {
   }
 
   render() {
-	//this.findWeeklyAppts();
     return (
 		<>
 			<div className="header">
@@ -221,7 +160,7 @@ export class Schedule extends Component {
 					</Modal>
 				</div>
 
-				<Viewport reloadFlag={this.state.viewportReloadFlag} showModal={this.handleModalShow} weekly_appts={this.state.weekly_appts} />
+				<Viewport updateDash={this.props.updateDash} showModal={this.handleModalShow} weekly_appts={this.props.weekly_appts} />
 			</div>
 		</>
     )

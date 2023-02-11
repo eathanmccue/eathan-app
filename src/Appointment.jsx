@@ -18,11 +18,15 @@ export class Appointment extends Component {
         }
     }
 
-    
-
     toggleInfo = (event) => {
         this.setState({
             infoVisible: !(this.state.infoVisible)
+        });
+    }
+
+    updateTime = (newTime) => {
+        this.setState({
+            time: newTime
         });
     }
     
@@ -55,9 +59,6 @@ export class Appointment extends Component {
                     <PencilSquare className="editIcon" size={20} onClick={() => {
                         this.props.showModal(this.state.id);
                     }}/>
-                    {
-                        // add onclick method to pencil square icon to bring up modal for editing appt info
-                    }
                 </div>
             </div>
 
