@@ -13,15 +13,20 @@ export class Appointment extends Component {
             user: this.props.user,
             date: this.props.date,
             time: this.props.time,
-            infoVisible: false
+            infoVisible: false,
+            reloadFlag: this.props.reloadFlag
         }
     }
-
-    
 
     toggleInfo = (event) => {
         this.setState({
             infoVisible: !(this.state.infoVisible)
+        });
+    }
+
+    updateTime = (newTime) => {
+        this.setState({
+            time: newTime
         });
     }
     
@@ -51,10 +56,9 @@ export class Appointment extends Component {
             <div className="head">
                 <div className='flexbox'>
                     <p>{this.state.user.name}</p>
-                    <PencilSquare className="editIcon" size={20} />
-                    {
-                        // add onclick method to pencil square icon to bring up modal for editing appt info
-                    }
+                    <PencilSquare className="editIcon" size={20} onClick={() => {
+                        this.props.showModal(this.state.id);
+                    }}/>
                 </div>
             </div>
 
