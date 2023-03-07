@@ -48,6 +48,12 @@
     margin-top: 20vh;
 }
 
+.randomButton{
+    cursor: pointer;
+    outline: 1px solid white;
+    padding: 2px;
+}
+
 @media screen and (max-width: 650px) {
 
     .users{

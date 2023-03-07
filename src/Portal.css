@@ -1,0 +1,45 @@
+.portals{
+    display: flex;
+    justify-content: center;
+}
+
+.portals > *{
+    margin: 20px;
+}
+
+.search{
+    float: left;
+    margin-top: 2vh;
+    max-width: 500px;
+}
+
+.input{
+    margin: 10px 0px;
+}
+
+.links{
+margin-top: 2vh;
+float: right;
+}
+
+.linksContainer{
+    display: flex;
+}
+
+.linksContainer > *{
+    margin: 10px;
+}
+
+.links img{
+    background-color: white;
+}
+
+.titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titles > *{
+    margin: 5px;
+}
