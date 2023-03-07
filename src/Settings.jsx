@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import './Page.css';
 
 export class Settings extends Component {
@@ -12,7 +12,25 @@ export class Settings extends Component {
         </div>
 
         <div className='settings'>
-          <Button onClick={this.props.logout} >Logout</Button>
+			<ul>
+				<li>
+					<Form.Group>
+						<p>Change System Theme</p>
+						<Form.Control type='color' value='#ff0000'></Form.Control>
+					</Form.Group>
+				</li>
+
+				<li>
+					<p>Clear remembered username</p>
+				</li>
+				
+				<li>
+					<p onClick={this.props.logout}>Logout</p>
+				</li>
+          	</ul>
+          
+          
+          	
         </div>
       </>
     )
