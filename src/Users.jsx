@@ -185,7 +185,7 @@ export class Users extends Component {
 		var date = event.target[0].value;
 		var time = event.target[1].value;
 
-		var userList = this.findUserList();
+		//var userList = this.findUserList();
 
 		var newAppointment = {
 			id: this.getUserId(),
@@ -278,7 +278,7 @@ export class Users extends Component {
 										Add
 									</Button>
 								</Form.Group>
-								<p onClick={this.generateRandomUser}>random user</p>
+								<p className="randomButton" onClick={this.generateRandomUser}>add random user</p>
 							</Form>
 						</div>
 					</div> :
