@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/eathan-app/static/css/main.4d06f6c3.css",
+    "main.js": "/eathan-app/static/js/main.5a719d28.js",
+    "static/js/787.5e3f72af.chunk.js": "/eathan-app/static/js/787.5e3f72af.chunk.js",
+    "static/media/koblenz_serial-regular.woff": "/eathan-app/static/media/koblenz_serial-regular.3f0693abc2712746fbbd.woff",
+    "index.html": "/eathan-app/index.html",
+    "main.4d06f6c3.css.map": "/eathan-app/static/css/main.4d06f6c3.css.map",
+    "main.5a719d28.js.map": "/eathan-app/static/js/main.5a719d28.js.map",
+    "787.5e3f72af.chunk.js.map": "/eathan-app/static/js/787.5e3f72af.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4d06f6c3.css",
+    "static/js/main.5a719d28.js"
+  ]
+}
