@@ -54,10 +54,37 @@
     padding: 2px;
 }
 
+.settings ul{
+    list-style: none;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.settings ul > li > * > *{
+    padding: 5px 0;
+}
+
+.settings p{
+    color: #fff;
+    text-decoration: none;
+    width: auto;
+    margin: auto;
+    padding: 5px 0;
+}
+
+.settings p:hover{
+    cursor: pointer;
+
+}
+
 @media screen and (max-width: 650px) {
 
     .users{
         flex-direction: column;
+    }
+
+    .schedule{
+        overflow-x: scroll;
     }
 
     

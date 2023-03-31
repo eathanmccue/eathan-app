@@ -143,7 +143,7 @@ export class Dashboard extends Component {
 				{this.state.pageId === "schedule" ? <Schedule updateDash={this.updateDash} updateScheduleFlag={this.state.scheduleReloadFlag} weekly_appts={this.state.weekly_appts} /> : null }
 				{this.state.pageId === "users" ? <Users updateSchedule={this.updateSchedule} /> : null }
 				{this.state.pageId === "portal" ? <Portal /> : null }
-				{this.state.pageId === "settings" ? <Settings logout={this.props.logout}/> : null }
+				{this.state.pageId === "settings" ? <Settings currentColor={this.props.currentColor} changeColor={this.props.changeColor} logout={this.props.logout}/> : null }
 				</div>
 				
 			</div>

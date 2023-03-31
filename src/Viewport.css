@@ -42,3 +42,23 @@
     font-weight: 600;
     color: #888888;
 }
+
+@media screen and (max-width: 650px) {
+
+    .background{
+        overflow: scroll;
+    }
+
+    .background .gridContainer{
+        overflow: scroll;
+    }
+
+    .background .gridContainer .gridTitles > h1{
+        width: 30vw;
+        overflow: visible;
+    }
+
+    .background .gridContainer .weekday{
+        width: 30vw;
+    }
+}
