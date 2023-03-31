@@ -1,40 +1,50 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import './Page.css';
 
 export class Settings extends Component {
 
-  render() {
-    return (
-      <>
-        <div className='header'>
-          <h2>Settings</h2>
-        </div>
+	submitColor = (event) => {
+		event.preventDefault();
+		this.props.changeColor(event.target[0].value);
+	}
 
-        <div className='settings'>
-			<ul>
-				<li>
-					<Form.Group>
-						<p>Change System Theme</p>
-						<Form.Control type='color' value='#ff0000'></Form.Control>
-					</Form.Group>
-				</li>
+	render() {
+		return (
+		<>
+			<div className='header'>
+			<h2>Settings</h2>
+			</div>
 
-				<li>
-					<p>Clear remembered username</p>
-				</li>
+			<div className='settings'>
+				<ul>
+					<li>
+						<Form onSubmit={this.submitColor}>
+							<Form.Group>
+								<p>Change System Theme:</p>
+								<Form.Control type='color' defaultValue={this.props.currentColor}></Form.Control>
+							</Form.Group>
+							<Form.Group>
+								<Button type="submit">Submit</Button>
+							</Form.Group>
+						</Form>
+					</li>
+
+					<li>
+						<p>Clear remembered username</p>
+					</li>
+					
+					<li>
+						<p onClick={this.props.logout}>Logout</p>
+					</li>
+				</ul>
+			
+			
 				
-				<li>
-					<p onClick={this.props.logout}>Logout</p>
-				</li>
-          	</ul>
-          
-          
-          	
-        </div>
-      </>
-    )
-  }
+			</div>
+		</>
+		)
+	}
 }
 
 export default Settings

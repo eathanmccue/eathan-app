@@ -3,12 +3,16 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import './App.css';
 
+//var purple = "#252031";
+
 export class App extends Component {
   constructor(props){
     super(props);
+
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      color: "#252031"
     };
   }
 
@@ -50,10 +54,16 @@ export class App extends Component {
     });
   }
 
+  changeColor = (newColor) => {
+    this.setState({
+      color: newColor
+    });
+  }
+
   render() {
     return (
-      <div className="app">
-        {this.isLoggedIn() ? <Dashboard username={this.state.username} logout={this.logout}/> : <Login signIn={this.signIn}/>}
+      <div className="app" style={{backgroundColor: this.state.color}}>
+        {this.isLoggedIn() ? <Dashboard username={this.state.username} currentColor={this.state.color} changeColor={this.changeColor} logout={this.logout}/> : <Login signIn={this.signIn}/>}
       </div>
     )
   }
