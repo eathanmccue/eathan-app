@@ -22,7 +22,7 @@ export class Dashboard extends Component {
 
 	findWeeklyAppts = () => {
 		//if weekly appts exists, print
-		console.log(this.state.appts);
+		//console.log(this.state.appts);
 
 		//get all appts from local storage
 		var appt_arr = JSON.parse(localStorage.getItem('APPTS'));

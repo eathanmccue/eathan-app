@@ -59,39 +59,41 @@ export class Schedule extends Component {
 	timeInput.defaultValue = this.state.modalAppt.time;
 
 	//replace appointment
-	var apptId = this.state.modalAppt.id;
+	var apptId = "" + this.state.modalAppt.id;
 
 	//console.log(apptId);
 
 	var apptList = JSON.parse(localStorage.getItem("APPTS"));
-	var newList = [];
+	var index = -1;
 
 	for(var i = 0; i < apptList.length; i++){
-		if(apptList[i].id === apptId){
-			//console.log("appt found with id: " + apptList[i].id);
-			//change data
+		if("" + apptList[i].id === apptId){
+			index = i;
+			console.log(index);
+
+			//make new appt with edited details
 			var editedAppt = {
 				id: apptList[i].id,
 				user: apptList[i].user,
 				date: dateInput.value,
 				time: timeInput.value
 			};
-			
-			console.log("appt " + apptList[i].id + " changed successfully");
-			newList.push(editedAppt);
-		}
-		else{
-			newList.push(apptList[i]);
+
+			//remove appt
+			apptList.splice(index, 1);
+
+			//replace with new one
+			apptList.push(editedAppt);
+
+			//update storage
+			localStorage.setItem("APPTS", JSON.stringify(apptList));
+			break;
 		}
 	}
 
-	//update appts in storage
-	localStorage.removeItem("APPTS");
-	localStorage.setItem("APPTS", JSON.stringify(newList));
-
 	this.props.updateDash(); // reload dash, re find weekly appts
-
 	this.handleModalClose();
+	this.forceUpdate();
 
   }
 

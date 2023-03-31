@@ -133,11 +133,23 @@ export class Users extends Component {
 
 	deleteUser = (event) => {
 
-		//delete the user at index from array storage
-		let userIndex = event.target.id;
-
 		//get user list
 		let userList = JSON.parse(localStorage.getItem("USERS"));
+
+		//delete the user at index from array storage
+		let userId = "" + event.target.id;
+		console.log("User ID: " + userId);
+		
+		let userIndex = -1;
+
+		for(var i = 0; i < userList.length; i++){
+			console.log("current user ID: " + userList[i].id);
+			if("" + userList[i].id === userId){
+				userIndex = i;
+			}
+		}
+
+		//console.log(userIndex);
 
 		//splice first half of users up to index
 		userList.splice(userIndex, 1); // first param is index to be removed, 2nd is how many elements to remove
@@ -239,6 +251,7 @@ export class Users extends Component {
 
 	render() {
 		var userList = this.findUserList();
+		console.log(userList);
 		return (
 			<>
 
