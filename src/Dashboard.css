@@ -9,7 +9,8 @@
 .dashboard .header{
     padding: 5vh 0 1vh;
     display: flex;
-    flex-direction: column; /* for subtitles n stuff */
+    text-align: left;
+    flex-direction: column; /* for subtitles */
 }
 
 .dashboard .header h2{
