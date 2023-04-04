@@ -23,10 +23,11 @@ export default class Login extends Component {
         return(
             <>
                 <Nav loggedIn={false} username={this.props.username}/>
-                <Container className='login'>
-                    <Container className='header'>
+                <Container className='header'>
                         <h1>Log in</h1>
                     </Container>
+                <Container className='login'>
+                    
                     
                     <Container className='inputs'>
                         <Form onSubmit={this.submitHandler}>
