@@ -17,7 +17,7 @@ export default class Nav extends Component {
       <div className='bar'>
 
         <div className='barLeft'>
-          <h1>Clever Morgan Health</h1>
+          <h1>Company Name</h1>
         </div>
 
         <div className='barRight'>
