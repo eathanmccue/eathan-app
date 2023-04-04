@@ -69,7 +69,7 @@ export class Schedule extends Component {
 	for(var i = 0; i < apptList.length; i++){
 		if("" + apptList[i].id === apptId){
 			index = i;
-			console.log(index);
+			//console.log(index);
 
 			//make new appt with edited details
 			var editedAppt = {

@@ -138,12 +138,12 @@ export class Users extends Component {
 
 		//delete the user at index from array storage
 		let userId = "" + event.target.id;
-		console.log("User ID: " + userId);
+		//console.log("User ID: " + userId);
 		
 		let userIndex = -1;
 
 		for(var i = 0; i < userList.length; i++){
-			console.log("current user ID: " + userList[i].id);
+			//console.log("current user ID: " + userList[i].id);
 			if("" + userList[i].id === userId){
 				userIndex = i;
 			}
@@ -223,7 +223,7 @@ export class Users extends Component {
 	generateRandomUser = () => {
 		var randomInt = Math.floor(Math.random() * 100);
 		const username = randomNames[randomInt];
-		console.log(randomNames[randomInt]);
+		//(randomNames[randomInt]);
 		const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
 		//new user obj
 		var newUser = {
@@ -251,7 +251,7 @@ export class Users extends Component {
 
 	render() {
 		var userList = this.findUserList();
-		console.log(userList);
+		//console.log(userList);
 		return (
 			<>
 

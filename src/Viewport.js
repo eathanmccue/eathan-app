@@ -57,7 +57,7 @@ export class Viewport extends Component {
         var daily_arr = [];
 
         if(weekly_appts.length === 0){
-            console.log("NO APPTS!!!!!");
+            //console.log("NO APPTS!!!!!");
             return;
             // no appts this week
         }
