@@ -81,9 +81,10 @@ export class Users extends Component {
 
 		//new user obj
 		var newUser = {
-		name: event.target[0].value,
-		email: event.target[1].value,
-		color: event.target[2].value
+			id: this.getUserId(),
+			name: event.target[0].value,
+			email: event.target[1].value,
+			color: event.target[2].value
 		}
 
 		var userList = JSON.parse(localStorage.getItem("USERS"));
