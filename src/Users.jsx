@@ -268,7 +268,7 @@ export class Users extends Component {
 					{this.state.addUserVisibility ? 
 					// visible add user section
 					<div className="addUserSection">
-						<div className="header">
+						<div className="header" id="newuser">
 							<h2 onClick={this.toggleAddUserVisibility}>New User</h2>
 							<DashLg className="icon" size={26} onClick={this.toggleAddUserVisibility}/>
 						</div>
@@ -298,7 +298,7 @@ export class Users extends Component {
 					</div> :
 					// hidden add user section
 					<div className="addUserSection">
-						<div className="header">
+						<div className="header" id="newuser">
 							<h2 onClick={this.toggleAddUserVisibility}>New User</h2>
 							<PlusLg className="icon" size={26} onClick={this.toggleAddUserVisibility}/>
 						</div>

@@ -5,6 +5,10 @@
     justify-content: center;
 }
 
+.addUserSection #newuser{
+    cursor: pointer;
+}
+
 .users .userCard{
     max-width: 400px;
     border: solid 8px;
